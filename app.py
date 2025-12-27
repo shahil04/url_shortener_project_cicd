@@ -5,7 +5,7 @@ import MySQLdb
 
 app = Flask(__name__)
 
-# Database config (UPDATE THESE)
+# Database config (UPDATE THESE  updates 2)
 DB_HOST = "database-1.cud2siaa2jqh.us-east-1.rds.amazonaws.com"
 DB_USER = "admin"
 DB_PASSWORD = "1234root"
