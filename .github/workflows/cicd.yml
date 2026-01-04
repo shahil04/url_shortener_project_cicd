@@ -21,7 +21,7 @@ jobs:
 
     - name: Run Flask Test
       run: |
-        python -m py_compile 
+        python -m py_compile app.py
   
     - name: Docker Build 
       run: docker build -t shahil004/url-shortener2 .
