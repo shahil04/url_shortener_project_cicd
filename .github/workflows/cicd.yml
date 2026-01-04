@@ -29,6 +29,12 @@ jobs:
       run: |
         python -m py_compile app.py
 
+    - name: Debug Secrets (TEMP)
+      run: |
+        echo "Username length: ${#DOCKER_USERNAME}"
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
     # 5️⃣ Login to Docker Hub
     - name: Docker Login
       run: |
