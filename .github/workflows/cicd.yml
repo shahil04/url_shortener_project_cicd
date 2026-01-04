@@ -1,31 +1,46 @@
 name: Flask CI
+
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    # 1️⃣ Checkout code
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
+    # 2️⃣ Setup Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: "3.10"
 
+    # 3️⃣ Install dependencies
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
 
+    # 4️⃣ Run basic Flask check
     - name: Run Flask Test
       run: |
         python -m py_compile app.py
-  
-    - name: Docker Build 
-      run: docker build -t shahil004/url-shortener2 .
 
+    # 5️⃣ Login to Docker Hub
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login \
+          -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
+    # 6️⃣ Build Docker image
+    - name: Docker Build
+      run: |
+        docker build -t USER/url-shortener:latest .
 
-
+    # 7️⃣ Push Docker image
+    - name: Docker Push
+      run: |
+        docker push USER/url-shortener:latest
