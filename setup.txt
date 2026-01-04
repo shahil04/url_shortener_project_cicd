@@ -24,3 +24,16 @@ update code or version of update in github
 
 ============================================
 github Action
+
+
+==========
+docer
+
+
+docker tag url3_jan YOUR_USERNAME/url3_jan:latest
+docker tag url3_jan shahil004/url3_jan:latest
+docker images
+docker push shahil004/url3_jan:latest
+
+
+- docker hub automations  push automaticlly and publish
