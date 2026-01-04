@@ -44,9 +44,9 @@ jobs:
     # 6️⃣ Build Docker image
     - name: Docker Build
       run: |
-        docker build -t USER/url-shortener:latest .
+        docker build -t shahil004/url-shortener:latest .
 
     # 7️⃣ Push Docker image
     - name: Docker Push
       run: |
-        docker push USER/url-shortener:latest
+        docker push shahil004/url-shortener:latest
