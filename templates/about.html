@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}About - URL Shortener{% endblock %}
+
+{% block extra_css %}
+  <style>
+    .about-content {
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .about-content h3 {
+      color: #333;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+
+    .about-content p {
+      margin-bottom: 15px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid #e0e0e0;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .feature-card p {
+      color: #666;
+      font-size: 0.95em;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="page-container">
+    <h1>📖 About Us</h1>
+    <p class="subtitle">Learn more about our URL Shortener service</p>
+    
+    <div class="about-content">
+      <h3>Welcome to URL Shortener</h3>
+      <p>
+        Our URL Shortener is a powerful, easy-to-use service that helps you transform long, 
+        unwieldy URLs into short, shareable links. Whether you're sharing links on social media, 
+        in emails, or anywhere else, our service makes it simple and convenient.
+      </p>
+
+      <h3>Why Choose Our Service?</h3>
+      <p>
+        We provide a fast, reliable, and secure URL shortening service that's completely free to use. 
+        Our platform is designed with user experience in mind, offering a clean interface and 
+        instant link generation.
+      </p>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Lightning Fast</h4>
+          <p>Generate shortened URLs instantly with our optimized service</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h4>Secure & Reliable</h4>
+          <p>Your links are safe and secure with our robust infrastructure</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h4>Analytics Ready</h4>
+          <p>Track clicks and monitor your link performance</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h4>Universal Access</h4>
+          <p>Access your shortened links from anywhere, anytime</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💯</div>
+          <h4>100% Free</h4>
+          <p>No hidden fees, no credit card required</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h4>Mobile Friendly</h4>
+          <p>Works perfectly on all devices and screen sizes</p>
+        </div>
+      </div>
+
+      <h3>How It Works</h3>
+      <p>
+        Using our URL Shortener is incredibly simple:
+      </p>
+      <ol style="margin-left: 20px; margin-top: 10px;">
+        <li style="margin-bottom: 10px;">Paste your long URL into the input field on our homepage</li>
+        <li style="margin-bottom: 10px;">Click the "Shorten URL" button</li>
+        <li style="margin-bottom: 10px;">Copy your new shortened link and share it anywhere</li>
+      </ol>
+
+      <h3>Our Mission</h3>
+      <p>
+        We believe that sharing links should be simple, fast, and hassle-free. Our mission is to 
+        provide the best URL shortening service that helps you share content more effectively 
+        across all platforms.
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
