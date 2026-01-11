@@ -3,512 +3,514 @@
 {% block title %}Home - URL Shortener{% endblock %}
 
 {% block extra_css %}
-    <style>
-      .main-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        margin-top: 0;
-      }
+<style>
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 0;
+  }
 
-      .result-container {
-        margin-top: 30px;
-        padding: 25px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-        border-radius: 15px;
-        border: 2px solid #e0e0e0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.5s ease-out;
-      }
+  .result-container {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+  }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
 
-      @keyframes pulse {
-        0%, 100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-      }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-      .result-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 25px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #e0e0e0;
-      }
+  @keyframes pulse {
 
-      .success-icon-wrapper {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        animation: pulse 2s ease-in-out infinite;
-      }
+    0%,
+    100% {
+      transform: scale(1);
+    }
 
-      .success-icon-svg {
-        width: 30px;
-        height: 30px;
-        color: white;
-      }
+    50% {
+      transform: scale(1.05);
+    }
+  }
 
-      .result-text {
-        flex: 1;
-      }
+  .result-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+  }
 
-      .result-title {
-        color: #333;
-        font-size: 1.3em;
-        margin-bottom: 5px;
-        font-weight: 700;
-      }
+  .success-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
 
-      .result-subtitle {
-        color: #666;
-        font-size: 0.9em;
-        margin: 0;
-      }
+  .success-icon-svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+  }
 
-      .url-comparison {
-        margin-bottom: 20px;
-      }
+  .result-text {
+    flex: 1;
+  }
 
-      .url-label {
-        display: block;
-        color: #666;
-        font-size: 0.85em;
-        font-weight: 600;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
+  .result-title {
+    color: #333;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
 
-      .original-url-section,
-      .short-url-section {
-        margin-bottom: 15px;
-      }
+  .result-subtitle {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
+  }
 
-      .url-display {
-        background: white;
-        padding: 12px 15px;
-        border-radius: 8px;
-        border: 2px solid #e0e0e0;
-        word-break: break-all;
-        font-size: 0.9em;
-        color: #666;
-        min-height: 45px;
-        display: flex;
-        align-items: center;
-      }
+  .url-comparison {
+    margin-bottom: 20px;
+  }
 
-      .url-display.original {
-        background: #f8f9fa;
-        border-color: #d0d0d0;
-      }
+  .url-label {
+    display: block;
+    color: #666;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-      .arrow-down {
-        text-align: center;
-        font-size: 1.5em;
-        color: #667eea;
-        margin: 10px 0;
-        animation: bounce 2s ease-in-out infinite;
-      }
+  .original-url-section,
+  .short-url-section {
+    margin-bottom: 15px;
+  }
 
-      @keyframes bounce {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(5px);
-        }
-      }
+  .url-display {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    word-break: break-all;
+    font-size: 0.9em;
+    color: #666;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+  }
 
-      .short-url-display {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: white;
-        padding: 15px;
-        border-radius: 8px;
-        border: 2px solid #667eea;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
-      }
+  .url-display.original {
+    background: #f8f9fa;
+    border-color: #d0d0d0;
+  }
 
-      .short-url-link {
-        flex: 1;
-        color: #667eea;
-        text-decoration: none;
-        font-weight: 600;
-        word-break: break-all;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
+  .arrow-down {
+    text-align: center;
+    font-size: 1.5em;
+    color: #667eea;
+    margin: 10px 0;
+    animation: bounce 2s ease-in-out infinite;
+  }
 
-      .short-url-link:hover {
-        color: #764ba2;
-      }
+  @keyframes bounce {
 
-      .url-icon {
-        font-size: 1.2em;
-        flex-shrink: 0;
-      }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
 
-      .copy-btn {
-        padding: 12px 24px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-      }
+    50% {
+      transform: translateY(5px);
+    }
+  }
 
-      .copy-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-      }
+  .short-url-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+  }
 
-      .copy-btn:active {
-        transform: translateY(0);
-      }
+  .short-url-link {
+    flex: 1;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    word-break: break-all;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-      .copy-btn.copied {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
-      }
+  .short-url-link:hover {
+    color: #764ba2;
+  }
 
-      .copy-icon {
-        font-size: 1.1em;
-      }
+  .url-icon {
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
 
-      .action-buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 2px solid #e0e0e0;
-      }
+  .copy-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
 
-      .action-btn {
-        flex: 1;
-        padding: 12px 20px;
-        background: white;
-        color: #667eea;
-        border: 2px solid #667eea;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-      }
+  .copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
 
-      .action-btn:hover {
-        background: #667eea;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-      }
+  .copy-btn:active {
+    transform: translateY(0);
+  }
 
-      .action-btn:active {
-        transform: translateY(0);
-      }
+  .copy-btn.copied {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+  }
 
-      .action-btn.secondary {
-        background: #f8f9fa;
-        border-color: #d0d0d0;
-        color: #666;
-      }
+  .copy-icon {
+    font-size: 1.1em;
+  }
 
-      .action-btn.secondary:hover {
-        background: #e9ecef;
-        border-color: #667eea;
-        color: #667eea;
-      }
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+  }
 
-      @media (max-width: 600px) {
-        .result-header {
-          flex-direction: column;
-          text-align: center;
-        }
+  .action-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
 
-        .result-title {
-          font-size: 1.1em;
-        }
+  .action-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
 
-        .result-subtitle {
-          font-size: 0.85em;
-        }
+  .action-btn:active {
+    transform: translateY(0);
+  }
 
-        .short-url-display {
-          flex-direction: column;
-          align-items: stretch;
-        }
+  .action-btn.secondary {
+    background: #f8f9fa;
+    border-color: #d0d0d0;
+    color: #666;
+  }
 
-        .copy-btn {
-          width: 100%;
-          justify-content: center;
-        }
+  .action-btn.secondary:hover {
+    background: #e9ecef;
+    border-color: #667eea;
+    color: #667eea;
+  }
 
-        .action-buttons {
-          flex-direction: column;
-        }
+  @media (max-width: 600px) {
+    .result-header {
+      flex-direction: column;
+      text-align: center;
+    }
 
-        .action-btn {
-          width: 100%;
-        }
+    .result-title {
+      font-size: 1.1em;
+    }
 
-        .url-display {
-          font-size: 0.85em;
-          padding: 10px 12px;
-        }
-      }
-    </style>
+    .result-subtitle {
+      font-size: 0.85em;
+    }
+
+    .short-url-display {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .copy-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .action-btn {
+      width: 100%;
+    }
+
+    .url-display {
+      font-size: 0.85em;
+      padding: 10px 12px;
+    }
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-  <div class="page-container">
-    <h1>🔗 URL Shortener</h1>
-    <p class="subtitle">Transform long URLs into short, shareable links</p>
-    
-    <form method="POST" id="urlForm">
-      <div class="form-group">
-        <input 
-          type="text" 
-          name="long_url" 
-          placeholder="Paste your long URL here..." 
-          required
-          autocomplete="off"
-        >
-      </div>
-      <button type="submit">Shorten URL</button>
-    </form>
+<div class="page-container">
+  <h1>🔗 URL Shortener 2</h1>
+  <p class="subtitle">Transform sha long URLs into short, shareable links</p>
 
-    {% if short_url %}
-    <div class="result-container">
-      <div class="result-header">
-        <div class="success-icon-wrapper">
-          <svg class="success-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-            <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="result-text">
-          <h3 class="result-title">Success! Your URL has been shortened</h3>
-          <p class="result-subtitle">Click the link to test it or copy to share</p>
-        </div>
+  <form method="POST" id="urlForm">
+    <div class="form-group">
+      <input type="text" name="long_url" placeholder="Paste your long URL here..." required autocomplete="off">
+    </div>
+    <button type="submit">Shorten URL</button>
+  </form>
+
+  {% if short_url %}
+  <div class="result-container">
+    <div class="result-header">
+      <div class="success-icon-wrapper">
+        <svg class="success-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
       </div>
-      
-      <div class="url-comparison">
-        <div class="original-url-section">
-          <label class="url-label">Original URL:</label>
-          <div class="url-display original" id="originalUrlDisplay">
-            <span id="originalUrlText">Loading...</span>
-          </div>
-        </div>
-        
-        <div class="arrow-down">↓</div>
-        
-        <div class="short-url-section">
-          <label class="url-label">Shortened URL:</label>
-          <div class="short-url-display">
-            <a href="{{ short_url }}" target="_blank" class="short-url-link" id="shortUrl" rel="noopener noreferrer">
-              <span class="url-icon">🔗</span>
-              {{ short_url }}
-            </a>
-            <button class="copy-btn" onclick="copyToClipboard()" id="copyBtn" aria-label="Copy shortened URL">
-              <span class="copy-icon" id="copyIcon">📋</span>
-              <span class="copy-text" id="copyText">Copy</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <div class="action-buttons">
-        <button class="action-btn secondary" onclick="createAnother()" id="createAnotherBtn">
-          <span>➕</span> Create Another
-        </button>
-        <button class="action-btn secondary" onclick="shareUrl()" id="shareBtn">
-          <span>📤</span> Share
-        </button>
+      <div class="result-text">
+        <h3 class="result-title">Success! Your URL has been shortened</h3>
+        <p class="result-subtitle">Click the link to test it or copy to share</p>
       </div>
     </div>
-    {% endif %}
+
+    <div class="url-comparison">
+      <div class="original-url-section">
+        <label class="url-label">Original URL:</label>
+        <div class="url-display original" id="originalUrlDisplay">
+          <span id="originalUrlText">Loading...</span>
+        </div>
+      </div>
+
+      <div class="arrow-down">↓</div>
+
+      <div class="short-url-section">
+        <label class="url-label">Shortened URL:</label>
+        <div class="short-url-display">
+          <a href="{{ short_url }}" target="_blank" class="short-url-link" id="shortUrl" rel="noopener noreferrer">
+            <span class="url-icon">🔗</span>
+            {{ short_url }}
+          </a>
+          <button class="copy-btn" onclick="copyToClipboard()" id="copyBtn" aria-label="Copy shortened URL">
+            <span class="copy-icon" id="copyIcon">📋</span>
+            <span class="copy-text" id="copyText">Copy</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="action-btn secondary" onclick="createAnother()" id="createAnotherBtn">
+        <span>➕</span> Create Another
+      </button>
+      <button class="action-btn secondary" onclick="shareUrl()" id="shareBtn">
+        <span>📤</span> Share
+      </button>
+    </div>
   </div>
+  {% endif %}
+</div>
 {% endblock %}
 
 {% block extra_js %}
-  <script>
-    // Store original URL from form submission
-    let originalUrl = '';
+<script>
+  // Store original URL from form submission
+  let originalUrl = '';
 
-    // Get original URL from form if available
-    document.addEventListener('DOMContentLoaded', function() {
-      const input = document.querySelector('input[name="long_url"]');
-      if (input) {
-        // Try to get from sessionStorage (stored before form submission)
-        originalUrl = sessionStorage.getItem('lastLongUrl') || input.value || '';
-        
-        // Display original URL if we have it
-        const originalUrlDisplay = document.getElementById('originalUrlText');
-        if (originalUrlDisplay && originalUrl) {
-          originalUrlDisplay.textContent = originalUrl;
-          originalUrlDisplay.style.color = '#333';
-        } else if (originalUrlDisplay) {
-          originalUrlDisplay.textContent = 'Original URL not available';
-          originalUrlDisplay.style.color = '#999';
-        }
-        
-        // Focus on input if no result is shown
-        if (!document.querySelector('.result-container') && !input.value) {
-          input.focus();
-        }
+  // Get original URL from form if available
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.querySelector('input[name="long_url"]');
+    if (input) {
+      // Try to get from sessionStorage (stored before form submission)
+      originalUrl = sessionStorage.getItem('lastLongUrl') || input.value || '';
+
+      // Display original URL if we have it
+      const originalUrlDisplay = document.getElementById('originalUrlText');
+      if (originalUrlDisplay && originalUrl) {
+        originalUrlDisplay.textContent = originalUrl;
+        originalUrlDisplay.style.color = '#333';
+      } else if (originalUrlDisplay) {
+        originalUrlDisplay.textContent = 'Original URL not available';
+        originalUrlDisplay.style.color = '#999';
       }
-    });
 
-    // Store URL before form submission
-    document.getElementById('urlForm')?.addEventListener('submit', function() {
-      const input = document.querySelector('input[name="long_url"]');
-      if (input && input.value) {
-        sessionStorage.setItem('lastLongUrl', input.value);
+      // Focus on input if no result is shown
+      if (!document.querySelector('.result-container') && !input.value) {
+        input.focus();
       }
-    });
+    }
+  });
 
-    function copyToClipboard() {
-      const shortUrlElement = document.getElementById('shortUrl');
-      const shortUrl = shortUrlElement.textContent.trim();
-      const copyBtn = document.getElementById('copyBtn');
-      const copyIcon = document.getElementById('copyIcon');
-      const copyText = document.getElementById('copyText');
-      
-      navigator.clipboard.writeText(shortUrl).then(function() {
+  // Store URL before form submission
+  document.getElementById('urlForm')?.addEventListener('submit', function () {
+    const input = document.querySelector('input[name="long_url"]');
+    if (input && input.value) {
+      sessionStorage.setItem('lastLongUrl', input.value);
+    }
+  });
+
+  function copyToClipboard() {
+    const shortUrlElement = document.getElementById('shortUrl');
+    const shortUrl = shortUrlElement.textContent.trim();
+    const copyBtn = document.getElementById('copyBtn');
+    const copyIcon = document.getElementById('copyIcon');
+    const copyText = document.getElementById('copyText');
+
+    navigator.clipboard.writeText(shortUrl).then(function () {
+      copyText.textContent = 'Copied!';
+      copyIcon.textContent = '✓';
+      copyBtn.classList.add('copied');
+
+      setTimeout(function () {
+        copyText.textContent = 'Copy';
+        copyIcon.textContent = '📋';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(function (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = shortUrl;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand('copy');
         copyText.textContent = 'Copied!';
         copyIcon.textContent = '✓';
         copyBtn.classList.add('copied');
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           copyText.textContent = 'Copy';
           copyIcon.textContent = '📋';
           copyBtn.classList.remove('copied');
         }, 2000);
-      }).catch(function(err) {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = shortUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
-        document.body.appendChild(textArea);
-        textArea.select();
-        
-        try {
-          document.execCommand('copy');
-          copyText.textContent = 'Copied!';
-          copyIcon.textContent = '✓';
-          copyBtn.classList.add('copied');
-          
-          setTimeout(function() {
-            copyText.textContent = 'Copy';
-            copyIcon.textContent = '📋';
-            copyBtn.classList.remove('copied');
-          }, 2000);
-        } catch (err) {
-          alert('Failed to copy. Please copy manually: ' + shortUrl);
-        }
-        
-        document.body.removeChild(textArea);
-      });
+      } catch (err) {
+        alert('Failed to copy. Please copy manually: ' + shortUrl);
+      }
+
+      document.body.removeChild(textArea);
+    });
+  }
+
+  function createAnother() {
+    // Clear the form and result
+    const form = document.getElementById('urlForm');
+    const input = document.querySelector('input[name="long_url"]');
+    const resultContainer = document.querySelector('.result-container');
+
+    if (input) {
+      input.value = '';
+      input.focus();
     }
 
-    function createAnother() {
-      // Clear the form and result
-      const form = document.getElementById('urlForm');
-      const input = document.querySelector('input[name="long_url"]');
-      const resultContainer = document.querySelector('.result-container');
-      
-      if (input) {
-        input.value = '';
-        input.focus();
-      }
-      
-      if (resultContainer) {
-        resultContainer.style.animation = 'fadeOut 0.3s ease-out';
-        setTimeout(function() {
-          resultContainer.remove();
-        }, 300);
-      }
-      
-      sessionStorage.removeItem('lastLongUrl');
+    if (resultContainer) {
+      resultContainer.style.animation = 'fadeOut 0.3s ease-out';
+      setTimeout(function () {
+        resultContainer.remove();
+      }, 300);
     }
 
-    function shareUrl() {
-      const shortUrl = document.getElementById('shortUrl').textContent.trim();
-      
-      if (navigator.share) {
-        navigator.share({
-          title: 'Shortened URL',
-          text: 'Check out this shortened URL',
-          url: shortUrl
-        }).catch(function(err) {
-          console.log('Error sharing:', err);
-          fallbackShare(shortUrl);
-        });
-      } else {
+    sessionStorage.removeItem('lastLongUrl');
+  }
+
+  function shareUrl() {
+    const shortUrl = document.getElementById('shortUrl').textContent.trim();
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'Shortened URL',
+        text: 'Check out this shortened URL',
+        url: shortUrl
+      }).catch(function (err) {
+        console.log('Error sharing:', err);
         fallbackShare(shortUrl);
-      }
+      });
+    } else {
+      fallbackShare(shortUrl);
     }
+  }
 
-    function fallbackShare(url) {
-      // Copy to clipboard as fallback
-      copyToClipboard();
-      
-      // Show a message
-      const shareBtn = document.getElementById('shareBtn');
-      const originalText = shareBtn.innerHTML;
-      shareBtn.innerHTML = '<span>✓</span> Copied to clipboard!';
-      shareBtn.style.background = '#28a745';
-      shareBtn.style.borderColor = '#28a745';
-      shareBtn.style.color = 'white';
-      
-      setTimeout(function() {
-        shareBtn.innerHTML = originalText;
-        shareBtn.style.background = '';
-        shareBtn.style.borderColor = '';
-        shareBtn.style.color = '';
-      }, 2000);
-    }
+  function fallbackShare(url) {
+    // Copy to clipboard as fallback
+    copyToClipboard();
 
-    // Add fadeOut animation
-    const style = document.createElement('style');
-    style.textContent = `
+    // Show a message
+    const shareBtn = document.getElementById('shareBtn');
+    const originalText = shareBtn.innerHTML;
+    shareBtn.innerHTML = '<span>✓</span> Copied to clipboard!';
+    shareBtn.style.background = '#28a745';
+    shareBtn.style.borderColor = '#28a745';
+    shareBtn.style.color = 'white';
+
+    setTimeout(function () {
+      shareBtn.innerHTML = originalText;
+      shareBtn.style.background = '';
+      shareBtn.style.borderColor = '';
+      shareBtn.style.color = '';
+    }, 2000);
+  }
+
+  // Add fadeOut animation
+  const style = document.createElement('style');
+  style.textContent = `
       @keyframes fadeOut {
         from {
           opacity: 1;
@@ -520,6 +522,6 @@
         }
       }
     `;
-    document.head.appendChild(style);
-  </script>
+  document.head.appendChild(style);
+</script>
 {% endblock %}
